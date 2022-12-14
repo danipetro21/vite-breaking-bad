@@ -10,6 +10,7 @@ export default {
     data() {
         return {
             store,
+     
         }
     },
 }
@@ -19,12 +20,13 @@ export default {
 <template>
 
     <div class="container">
-        <div class="found_c">Found 62 Character</div>
+        
+        <div class="found_c">Found {{ index }} Character</div>
 
         <div class="box_card">
 
-            <Character v-for="character in store.characterList" :result="character" />
-
+            <Character v-for="(character, index) in store.characterList" :result="character" />
+ 
         </div>
 
     </div>
