@@ -3,11 +3,14 @@ import AppHeader from './components/AppHeader.vue'
 import CharacterList from './components/CharacterList.vue'
 import { store } from './store.js'
 import axios from 'axios';
+import AppSearch from './components/AppSearch.vue'
+
 
 export default {
   components: {
     AppHeader,
-    CharacterList
+    CharacterList,
+    AppSearch
   },
   data() {
     return {
@@ -16,8 +19,15 @@ export default {
   },
   methods: {
     getAPI() {
+      let myUrl = store.apiURL
+      
+
+      if(store.searchSelect !== 'statusD' || store.searchText !== "" ){
+         myUrl += `?${store.apiNameParameter1}=${store.searchSelect}&${store.apiNameParameter2}=${store.searchText}`
+      }
+
       axios
-        .get(store.apiURL)
+        .get(myUrl)
         .then(res => {
           store.characterList = res.data.results
         })
@@ -36,7 +46,7 @@ export default {
 
 <template>
   <AppHeader :msg="store.titolo" />
-
+  <AppSearch @search="getAPI"/>
   <main>
 
     <CharacterList/>
