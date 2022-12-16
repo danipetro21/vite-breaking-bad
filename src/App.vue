@@ -4,28 +4,31 @@ import CharacterList from './components/CharacterList.vue'
 import { store } from './store.js'
 import axios from 'axios';
 import AppSearch from './components/AppSearch.vue'
+import AppLoader from './components/AppLoader.vue';
 
 
 export default {
   components: {
     AppHeader,
     CharacterList,
-    AppSearch
+    AppSearch,
+    AppLoader
   },
   data() {
     return {
       store,
+      loading: false,
     }
   },
   methods: {
     getAPI() {
       let myUrl = store.apiURL
-      
 
-      if(store.searchSelect !== 'statusD' || store.searchText !== "" ){
-         myUrl += `?${store.apiNameParameter1}=${store.searchSelect}&${store.apiNameParameter2}=${store.searchText}`
+      if (store.searchSelect !== 'statusD' || store.searchText !== "") {
+        myUrl += `?${store.apiNameParameter1}=${store.searchSelect}&${store.apiNameParameter2}=${store.searchText}`
       }
 
+      this.loading = true;
       axios
         .get(myUrl)
         .then(res => {
@@ -33,6 +36,8 @@ export default {
         })
         .catch(err => {
           console.log("errori", err);
+        }).finally(() => {
+          this.loading = false;
         });
     }
 
@@ -45,18 +50,18 @@ export default {
 </script>
 
 <template>
+
+  <AppLoader v-if="loading" />
   <AppHeader :msg="store.titolo" />
-  <AppSearch @search="getAPI"/>
+  <AppSearch @search="getAPI" />
   <main>
 
-    <CharacterList/>
-    
+    <CharacterList />
+
   </main>
 
 </template>
 
 <style lang="scss">
-
 @use './style/general.scss';
-
 </style>
