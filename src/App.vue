@@ -26,9 +26,9 @@ export default {
     getAPI() {
       let myUrl = store.apiURL
 
-      // if(store.page !==1){
-      myUrl += `/?${store.apiNameParameter3}=${store.page}`;
-      // }
+
+        myUrl += `/?${store.apiNameParameter3}=${store.page}`;
+      
 
       if (store.searchSelect == 'statusD') {
         myUrl += `&${store.apiNameParameter2}=${store.searchText}`;

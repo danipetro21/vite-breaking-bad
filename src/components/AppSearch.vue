@@ -14,6 +14,7 @@ export default {
         resetSearch() {
             store.searchSelect = 'statusD';
             store.searchText = '';
+            store.page = 1;
             this.$emit('search');
         }
     }
