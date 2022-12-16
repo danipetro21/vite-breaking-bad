@@ -8,7 +8,8 @@ export default {
 
 <template>
 
-    <div class="card" :class="result.status === 'Dead' ? 'c-dead' : result.status === 'Alive' ? 'c-alive' : 'c-unknown'">
+    <div class="card"
+        :class="result.status === 'Dead' ? 'c-dead' : result.status === 'Alive' ? 'c-alive' : 'c-unknown'">
         <img :src="result.image" :alt="result.name">
         <h1>{{ result.name }}</h1>
         <div class="sub">{{ result.species }}</div>
@@ -24,34 +25,35 @@ export default {
 
 .card {
     background-color: $bg_primary;
-    width: calc(100% / 5 - 20px);
+    width: calc(100% / 4 - 20px);
     padding: 15px;
     margin: 10px;
+    justify-content: space-around;
     display: flex;
     flex-direction: column;
-    
+
     img {
         width: 100%;
         object-fit: cover;
     }
 
     h1 {
-        margin-top: 10px;
+        margin: 20px 0;
         font-size: 1.5rem;
     }
 
 }
 
 .c-dead {
-    border: 5px solid red;
+    border: 7px solid red;
 }
 
 .c-alive {
-    border: 5px solid green;
+    border: 7px solid green;
 }
 
 .c-unknown {
-    border: 5px solid gold;
+    border: 7px solid gold;
 
 }
 
